@@ -50,14 +50,16 @@ product2 = Series([3000, 3000, 2500, 2000],
 
 
 # <단계1> Series 연산 : product3 = product1 - product2 
-
+product3 = product1-product2 
+print(product3)
 # <단계2> product3 결측치(NaN) 유무 확인 
-
+print(product3.isnull())
 # <단계3> product3 결측치(NaN) 채우기 : 결측치 = product3 최댓값 - product3 최솟값
-
+product3=product3.fillna(product3.max()-product3.min())
+print(product3)
 # <단계4> product4 만들기 : product3의 평균 이하의 자료만 추출 
-
-
+product4=product3[product3<=product3.mean()]
+print(product4)
 
 
 

@@ -15,12 +15,29 @@ import pandas as pd
 path = r"c:/ITWILL/4_Python_ML/data" # file 경로 변경 
 
 # <단계1> 파일 가져오기, 정보 확인 
-
+wdbc = pd.read_csv(path+'/wdbc_data.csv')
+wdbc.info()
 
 # <단계2> y변수, x변수 선택
-y = None # diagnosis 칼럼 
-x = None # id 칼럼 제외 나머지 30개 칼럼
+y = wdbc.diagnosis # diagnosis 칼럼 
+
+cols =list(wdbc.columns)
+x = wdbc[cols[2:]] # id 칼럼 제외 나머지 30개 칼럼
+x = wdbc[wdbc.columns[2:]]
+print(x.columns)
+
 
 # <단계3> y변수의 범주('B', 'M')를 기준으로 서브셋 만들기
-B_tumor = None
-M_tumor = None 
+y.unique() # >> array(['B', 'M'], dtype=object)
+y.value_counts()
+'''
+diagnosis
+B    357
+M    212
+Name: count, dtype: int64
+'''
+B_tumor = wdbc[wdbc.diagnosis == 'B']
+M_tumor = wdbc[wdbc.diagnosis == 'M']
+print(B_tumor)
+B_tumor.shape # (357, 32)
+M_tumor.shape # (212, 32)
