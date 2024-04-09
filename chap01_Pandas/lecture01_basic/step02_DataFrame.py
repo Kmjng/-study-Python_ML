@@ -132,5 +132,5 @@ names # ['Sepal.Length', 'Sepal.Width', 'Petal.Length', 'Petal.Width', 'Species'
 # 독립변수 선택 
 iris_x = iris[names[:4]] #iris[열 리스트]
 
-# 특정 칼럼 제거하기 #remove()메소드
+# 리스트 칼럼 하나 제거하기 #remove()메소드
 names.remove('Sepal.Width') # 바로 반영됨
