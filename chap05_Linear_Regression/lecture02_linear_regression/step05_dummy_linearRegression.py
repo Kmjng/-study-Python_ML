@@ -70,6 +70,9 @@ model = LinearRegression().fit(X=X_train, y=y_train)
 model.score(X=X_train, y=y_train) # 0.6837522970202745
 model.score(X=X_test, y=y_test)   # 0.7236336310934985
 '''
+ 이상치 처리 전 결정계수 
+ 훈련셋 : 0.6837522970202745
+ 평가셋 :0.7236336310934985
  train 데이터에 이상치가 있을 경우 test 데이터보다 결정계수가 낮을 수 있다. 
  그래서? 이상치 전처리를 해줘야 한다 ★★★
 '''
@@ -104,3 +107,17 @@ X_dummy[X_dummy.bmi< 0].index
 
 X_train, X_test, y_train, y_test = train_test_split(
     X_new, y, test_size=0.3, random_state=123)
+
+model_p = LinearRegression().fit(X= X_train, y= y_train)
+
+y_pred = model_p.predict(X=X_test)
+y_true = y_test 
+
+score1 = model_p.score(X_train, y_train)
+score2 = model_p.score(X_test, y_test)
+print(score1,":",score2)
+'''
+ 이상치 처리 후 결정계수 
+ 훈련셋 : 0.7425695212639727
+ 평가셋 : 0.7612276881341357
+'''
