@@ -55,18 +55,3 @@ model2 = obj2.fit(X=X_train, y=y_train)
 model2.score(X=X_train, y=y_train) # 0.9714285714285714
 model2.score(X=X_test, y=y_test) # 0.9833333333333333
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

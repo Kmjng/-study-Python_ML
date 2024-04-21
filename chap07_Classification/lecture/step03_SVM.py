@@ -27,7 +27,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 svc = SVC(C=1.0, kernel='rbf', gamma='scale')
 '''
 기본 parameter
- C=1.0 : cost(오분류) 조절 : 결정경계 위치 조정
+ C=1.0 : cost(오분류) 조절; 결정경계 위치 조정
  kernel='rbf' : 커널트릭 함수 
   -> kernel : {'linear', 'poly', 'rbf', 'sigmoid', 'precomputed'}
  gamma='scale' : 결정경계 모양 조절 조정 
@@ -61,11 +61,3 @@ y_pred = model2.predict(X = X_test)
 
 acc = accuracy_score(y_test, y_pred)
 print('accuracy =',acc) # accuracy = 0.9707602339181286
-
-
-
-
-
-
-
-
