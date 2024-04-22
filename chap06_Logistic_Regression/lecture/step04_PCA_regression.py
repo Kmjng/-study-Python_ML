@@ -136,15 +136,41 @@ plt.show()
 
 # 4) 주성분 결정 : 분산비율(분산량) 95%에 해당하는 지점
 print(X_pca[:, :2]) # 주성분분석 2개 차원 선정  
+X_new = X_pca[:, :2]
 
+X_new.shape # (150, 2) 
+print(X_new)
 
 # 5. 주성분분석 결과를 회귀분석과 분류분석의 독립변수 이용 
+# ★★★★★★★
 
 from sklearn.linear_model import LinearRegression # 선형회귀모델  
 from sklearn.linear_model import LogisticRegression # 로지스틱회귀모델  
 
-from sklearn.metrics import r2_score, mean_squared_error,accuracy_score # 평가 
-from sklearn.model_selection import train_test_split # datasets split 
+##################################
+# LinearRegression : X vs X_new
+##################################
 
+# 원형 자료 
+lr_model1 = LinearRegression().fit(X = X, y = y)
+lr_model1.score(X = X, y = y) # r2 score 
+# 0.9303939218549564
 
+# 주성분 자료 
+lr_model2 = LinearRegression().fit(X = X_new, y = y)
+lr_model2.score(X = X_new, y = y) # r2 score
+# 0.9087681620170027
 
+##################################
+# LogisticRegression : X vs X_new
+##################################
+
+# 원형 자료 
+lr_model1 = LogisticRegression().fit(X = X, y = y)
+lr_model1.score(X = X, y = y) # accuracy
+# 0.9733333333333334
+
+# 주성분 자료 
+lr_model2 = LogisticRegression().fit(X = X_new, y = y)
+lr_model2.score(X = X_new, y = y) # accuracy
+# 0.9666666666666667
