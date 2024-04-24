@@ -34,6 +34,8 @@ model = XGBClassifier().fit(X_train, y_train) # default
 
 print(model) # 주요 default parameters 
 '''
+XGBoost의 주요 Hyper parameter 
+
 1.colsample_bytree=1 : 트리 모델 생성 시 훈련셋 샘플링 비율(보통 : 0.6 ~ 1)
 2.learning_rate=0.3 : 학습율(보통 : 0.01~0.1) = 0의 수렴속도 
 3.max_depth=6 : 트리의 깊이(클 수록 성능이 좋아짐, 과적합 영향)
@@ -48,10 +50,10 @@ print(model) # 주요 default parameters
 y_pred = model.predict(X_test)
 
 acc = accuracy_score(y_test, y_pred)
-print(acc) # 0.9590643274853801
+print(acc) # 0.9707602339181286
 
 
-
+#######################
 ### 2. 학습 조기 종료 model 생성 
 xgb = XGBClassifier(colsample_bytree=1,
                     learning_rate=0.3,
@@ -62,18 +64,19 @@ xgb = XGBClassifier(colsample_bytree=1,
 eval_set = [(X_test, y_test)]  
 
 # 1) 학습조기종료 model 생성 
-es_model = xgb.fit(X=X_train, y=y_train, 
-                eval_set=eval_set,
-                eval_metric='error',
-                early_stopping_rounds=80,
-                verbose=True)
+es_model = xgb.fit(X=X_train, y=y_train,   # 훈련 셋
+                eval_set=eval_set,   # 검증 셋 
+                eval_metric='error', # 평가지표
+                early_stopping_rounds=80, # 조기종료 트리 갯수 
+                verbose=True)     # 학습과정 콘솔 출력 
 
+# early_stopping_rounds 80tree 학습 후 오차 변화 없으면 종료
 
 # 2) model 평가 
 y_pred = model.predict(X_test)
 
 acc = accuracy_score(y_test, y_pred)
-print(acc) 
+print(acc) # 0.9766081871345029
 
 report = classification_report(y_test, y_pred)
 print(report)
@@ -93,7 +96,7 @@ params = {'colsample_bytree': [0.5, 0.7, 1],
 
 
 gs = GridSearchCV(estimator = xgb, 
-             param_grid = params, cv=5)
+             param_grid = params, cv=5) # 5번 분할해서 진행해서 오래걸림 ;; 
 
 model = gs.fit(X=X_train, y=y_train, eval_metric='error',
        eval_set = eval_set, verbose=True)
@@ -102,10 +105,3 @@ model = gs.fit(X=X_train, y=y_train, eval_metric='error',
 print('best score =', model.best_score_)
 
 print('best parameters :', model.best_params_)
-
-
-
-
-
-
-

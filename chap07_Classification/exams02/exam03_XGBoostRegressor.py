@@ -94,14 +94,46 @@ plot_importance(model, max_num_features = 6) # 중요변수 6개까지
 hum(습도) > temp(기온) > windspeed(풍속) > weekday(요일) > atemp > mnth 
 '''
 
-# 단계6. model 평가 
 
+#######################################
+## 탐색적자료분석(EDA) : 중요변수 기준 
+#######################################
+
+# 습도(hum) vs 이용자수(registered)
+sn.scatterplot(data = data, x=data.hum, 
+               y=data.registered)
+#[해설] 습도 0.4 이상 일때 이용자수가 많아진다.
+
+# 풍속(windspeed) vs 이용자수(registered)
+sn.scatterplot(data = data, x=data.windspeed, 
+               y=data.registered)
+#[해설] 풍속 0.35이하 일때 이용자수가 많아진다. 
+
+# 온도(temp) vs 이용자수(registered)
+sn.scatterplot(data = data, x=data.temp, 
+               y=data.registered)
+#[해설] 온도가 높을 수록 이용자수가 많아진다. 
+
+
+# 주말(weekday) vs 이용자수(registered) 
+data.weekday # 이산변수 
+sn.barplot(data = data, x=data.weekday, 
+               y=data.registered)
+#[해설] 주말(0, 6)에 비해서 평일(1~5) 이용자수가 많다. 
+
+
+# 월(mnth) vs 이용자수(registered) 
+data.mnth # 이산변수
+sn.barplot(data = data, x=data.mnth, 
+               y=data.registered)
+#[해설] 5월~10월 사이 이용자수가 상대적으로 많다.
+
+
+# 단계6. model 평가 
 y_pred = model.predict(X_test)
 
+score = r2_score(y_test, y_pred)
+print('r2 score =', score)
+# r2 score = 0.8948685530861655
 
-from sklearn.metrics import mean_squared_error
-mse = mean_squared_error(y_test, y_pred)
-mse # 
-
-import seaborn as sns 
-sns.scatterplot(data = data, x=data.hum, y=data.registered)
+# MSE 보려면 데이터 스케일링 진행해야 할 듯 

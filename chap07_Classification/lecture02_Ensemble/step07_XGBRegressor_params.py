@@ -83,7 +83,7 @@ objective='reg:squarederror'
 ## 학습조기종료(early_stopping)
 #################################
 evals = [(X_test, y_test)]
-model.fit(X_train, y_train, eval_metric='rmse', 
+model.fit(X_train, y_train, eval_metric='rmse',  # 평가 방법 
                 early_stopping_rounds=100, eval_set=evals, verbose=True)
 '''
 early_stopping_rounds=100 : 조기종료 파라미터
@@ -93,10 +93,10 @@ early_stopping_rounds=100 : 조기종료 파라미터
 # 4. model 평가 
 y_pred = model.predict(X_test)
 mse = mean_squared_error(y_test, y_pred)
-print('mse =', mse) 
+print('mse =', mse) # mse = 0.02653424888554659
 
 score = r2_score(y_test, y_pred)
-print('score=', score) 
+print('score=', score)  # score= 0.8132951769205492
 
 
 #################################
@@ -109,6 +109,7 @@ model = XGBRegressor(n_estimators=100,
                     objective='reg:squarederror')
 
 params = {'max_depth':[3, 5, 7], 'min_child_weight':[1, 3],
+          'n_estimators':[100, 150, 200], 
           'colsample_bytree':[0.5, 0.7], 'learning_rate':[0.01, 0.5, 0.1]}
 
 
@@ -121,4 +122,11 @@ grid_model.fit(X=X_train, y= y_train)
 print('best score =', grid_model.best_score_) 
 print('best parameter =', grid_model.best_params_)
 
-
+'''
+best score = 0.8728546505525833
+best parameter = 
+{'colsample_bytree': 0.7, 
+ 'learning_rate': 0.1, 
+'max_depth': 3, 'min_child_weight': 3,
+ 'n_estimators': 200}
+'''

@@ -95,9 +95,50 @@ print('r2 score =', score) # r2 score = 0.8590175164169235
 import seaborn as sn 
 boston.CRIM #연속형 변수 # X
 boston.MEDV #연속형 변수 # y
+
 # scatterplot 
 sn.scatterplot(data = boston, x= boston.CRIM, y= boston.MEDV)
 sn.scatterplot(data = boston, x= boston.RM, y= boston.MEDV)
+
+# 데이터 구간화 ★★★
+# 비율척도 -> 명목척도(구간화)
+# 방법 (1) 
+boston.RM.min() # 3.561
+boston.RM.max() # 8.78
+'''
+3 : 4미만 
+4 : 4~5
+5 : 5~6
+6 : 6~7
+7 : 7이상
+'''
+
+rm = boston.RM
+rm_new = [] 
+
+for r in rm :
+    if r < 4 :
+        rm_new.append(3)
+    elif r > 4 and r < 5 :
+        rm_new.append(4)
+    elif r > 5 and r < 6 :
+        rm_new.append(5)        
+    elif r > 6 and r < 7 :
+        rm_new.append(6)
+    else :
+       rm_new.append(7) 
+       
+rm[:5] # 비율척도       
+rm_new[:5] # 구간화       
+
+# 칼럼 추가 
+boston['rm_new'] = rm_new
+
+sn.barplot(data = boston, x=boston.rm_new, y = boston.MEDV)
+# [해설] 대체적으로 방의 개수가 많을 수록 주택 가격이 높아진다.
+
+
+
 ###########################################
 ### 6. model save & Testing 
 # 학습된 모델 객체 자체를 피클타입으로 저장한다. 
