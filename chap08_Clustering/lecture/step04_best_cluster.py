@@ -13,10 +13,22 @@ print(X)
 
 
 # 2. Best Cluster 
-size = range(1, 11) # k값 범위
-inertia = [] # 응집도 
+'''
+엘보우 방법은 K-means 알고리즘을 실행할 때, 클러스터 개수(K)를 점차 증가시키면서 
+클러스터링을 수행하고, 이에 따른 SSE(Sum of Squared Errors) 값을 계산하여 
+그래프로 나타내어 최적의 K값을 선택하는 방법
 
-for k in size : 
+SSE 값 계산 : inertia_ 메소드
+
+inertia value (y값) 가 작을 수록 '응집도'가 좋다.
+
+'''
+size = range(1, 11) # k값 범위
+inertia = [] # 응집도 # 모든 point ~ 중심point 간의 거리제곱의 합 
+
+
+
+for k in size :  # k = 1 ~ 10 
     obj = KMeans(n_clusters = k) 
     model = obj.fit(X)
     inertia.append(model.inertia_) 
@@ -28,8 +40,3 @@ print(inertia)
 plt.plot(size, inertia, '-o')
 plt.xticks(size)
 plt.show()
-
-
-
-
-
