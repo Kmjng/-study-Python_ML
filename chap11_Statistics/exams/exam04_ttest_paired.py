@@ -19,10 +19,16 @@ post_exposure = np.array([53,27,38,55,61,85,45,31,72,78]) # 광고 노출후 태
 
 
 # 2. 대응표본 t검정
-paired_sample = None
+paired_sample = stats.ttest_rel(pre_exposure, post_exposure, 
+                                alternative = 'less')
 print('t검정 통계량 = %.5f, pvalue = %.5f'%paired_sample)
-
+'''
+t검정 통계량 = -4.19058, pvalue = 0.00117
+'''
 
 # 3. 검정결과 해설 
-
+'''
+대립가설 채택 
+광고 후 태도가 개선된다. (태도가 증가한다)
+'''
 

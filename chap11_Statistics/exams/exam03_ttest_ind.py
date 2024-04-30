@@ -1,5 +1,6 @@
 '''
-문3) 다음과 같은 wine 자료를 이용하여 red 와인과 white 와인의 alcohol에 대해서 
+문3) 다음과 같은 wine 자료를 이용하여 red 와인과 white 와인의 
+alcohol에 대해서 
      유의수준 5%에서 독립표분 t검정을 수행하시오.
 '''
 
@@ -28,32 +29,23 @@ print(wine.info())
 
 
 # 1. red 와인과 white 와인의 alcohol에 대한 subset 만들기  
-red_alcohol = None
-white_alcohol = None
+red_alcohol = wine.loc[wine.type=='red', 'alcohol']
+white_alcohol = wine.loc[wine.type=='white', 'alcohol']
+red_alcohol
 
-
-# 2. 기술통계 : 각 집단별 평균 
+# 2. 기술통계 : 각 집단별 평균
+red_alcohol.mean() # 10.422983114446529
+white_alcohol.mean() # 10.51426704777011
 
 
 # 3. 독립표본 t검정 : 두 집단 평균 검정
-two_sample = None
+two_sample = stats.ttest_ind(red_alcohol, white_alcohol)
 
 print('t검정 통계량 = %.3f, pvalue = %.5f'%(two_sample))
 
-
 # 4. 검정결과 해설 
 '''
-[해설] 
+t검정 통계량 = -2.659, pvalue = 0.00787
+
+>> 유의수준 0.05에 의해 두 집단 평균 차이가 있다. 
 '''
-
-
-
-
-
-
-
-
-
-
-
-
