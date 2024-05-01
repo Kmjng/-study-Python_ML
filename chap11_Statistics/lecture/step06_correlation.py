@@ -22,11 +22,21 @@ print(score_iq)
 
 # 1. 피어슨 상관계수 행렬 
 corr = score_iq.corr(method='pearson')
-print(corr)
- 
+
+# score에 대한 상관계수 
+corr['score']
+'''
+sid       -0.014399
+score      1.000000
+iq         0.882220
+academy    0.896265
+game      -0.298193
+tv        -0.819752
+Name: score, dtype: float64
+'''
 # 2. 공분산 행렬 
 cov = score_iq.cov()
-print(cov)
+cov['score']
 
 
 # 3. 공분산 vs 상관계수 식 적용 
@@ -50,11 +60,3 @@ stdY = Y.std()
 
 Corr = Cov / (stdX * stdY)
 print('Corr =', Corr) 
-
-
-
-
-
-
-
-

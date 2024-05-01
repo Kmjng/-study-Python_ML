@@ -64,6 +64,7 @@ print(y_pred[:10])
 import matplotlib.pyplot as plt
 
 # 산점도 
+# plt.plot() 기본 그래프 
 plt.plot(score_iq['iq'], score_iq['score'], 'b.')
 # 회귀선 
 plt.plot(score_iq['iq'], y_pred, 'r.-')
@@ -92,8 +93,25 @@ print('회귀 계수값\n%s'%(model.params))
 print('model 적합치 :', model.fittedvalues)
 
 # 회귀분석 결과 제공  
-print(model.summary()) 
-
-
-
-
+print(model.summary())  # 유의성 검정
+'''
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                  score   R-squared:                       0.946
+Model:                            OLS   Adj. R-squared:                  0.945
+Method:                 Least Squares   F-statistic:                     860.1
+Date:                Wed, 01 May 2024   Prob (F-statistic):           1.50e-92
+Time:                        12:10:25   Log-Likelihood:                -274.84
+No. Observations:                 150   AIC:                             557.7
+Df Residuals:                     146   BIC:                             569.7
+Df Model:                           3                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept     24.7223      2.332     10.602      0.000      20.114      29.331
+iq             0.3742      0.020     19.109      0.000       0.335       0.413
+academy        3.2088      0.367      8.733      0.000       2.483       3.935
+tv             0.1926      0.303      0.636      0.526      -0.406       0.791
+==============================================================================
+'''

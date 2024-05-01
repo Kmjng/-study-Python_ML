@@ -53,6 +53,7 @@ X3 = 0.2
 y[0] # 5.1
 
 # 다중회귀 방정식 
+# 유의성검정 결과 보려면, ols 모듈 사용해서 summary()하면 됨 
 y_pred =  model.intercept_ + X1*(model.coef_[0]) + X2* (model.coef_[1]) + X3*(model.coef_[2])
 y_pred
 
